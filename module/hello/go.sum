@@ -1,0 +1,6 @@
+github.com/lesismal/fib v1.6.1-0.20261101131127-4b24cf3e63f8 h1:3h3UZblU8CI/c7zq4lcldCXiVjDxqWJC+irIPnXMYr4=
+github.com/lesismal/fib v1.6.1-0.20261101131127-4b24cf3e63f8/go.mod h1:twNZUwXjldYLBTGzZSqA8Y+GDC+o7+Zan8LuyZDTGt4=
+github.com/lesismal/fit v0.0.0-20261102104814-e497491701c0 h1:we/GuC1sYfWtRp8Z+UTazTABW6fpeXYHeu+jd7xYUwM=
+github.com/lesismal/fit v0.0.0-20261102104814-e497491701c0/go.mod h1:yKwoOI/lIJGcFC8+mhpH015nRcrBffwB8m8n0HeGzKw=
+golang.org/x/sys v0.49.0 h1:XbzkgYJHdqh/8m2Uu0W/dQv8nktxx4BFHp1M0gROTXA=
+golang.org/x/sys v0.49.0/go.mod h1:hNLxWAXmnKAxqDtdwIYC4bM9oQPEecfsnNMuSxOs3og=

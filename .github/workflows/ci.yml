@@ -1,0 +1,90 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    # fit's main moves on its own; the examples are checked against it daily.
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Validate (fit ${{ matrix.fit }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # pinned: the fit go.mod requires; main: fit's latest main.
+        fit: [pinned, main]
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: go.mod
+      - uses: actions/checkout@v5
+        if: matrix.fit == 'main'
+        with:
+          repository: lesismal/fit
+          path: .fit
+      - name: Build against fit's main
+        if: matrix.fit == 'main'
+        run: |
+          for m in . module/hello; do
+            (cd "$m" && go mod edit -replace "github.com/lesismal/fit=$GITHUB_WORKSPACE/.fit" && go mod tidy)
+          done
+      - name: gofmt
+        run: test -z "$(gofmt -l *.go module)"
+      - name: vet
+        run: |
+          go vet ./...
+          (cd module/hello && go vet ./...)
+      - name: Validate the examples
+        run: go test -count=1 ./...
+      - name: Build fit with the module
+        run: |
+          go install github.com/lesismal/fit/cmd/fit
+          if [ "${{ matrix.fit }}" = main ]; then fit="$GITHUB_WORKSPACE/.fit"; else fit=$(go list -m -f '{{.Version}}' github.com/lesismal/fit); fi
+          "$(go env GOPATH)/bin/fit" build -fit "$fit" -with "github.com/lesismal/fit-examples/module/hello=./module/hello" -o "$RUNNER_TEMP/fit-hello"
+          "$RUNNER_TEMP/fit-hello" version
+
+  compose:
+    name: Docker Compose example
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/checkout@v5
+        with:
+          repository: lesismal/fit
+          path: .fit
+      - run: FIT_DIR="$GITHUB_WORKSPACE/.fit" docker-compose/test.sh
+
+  kubernetes:
+    name: Kubernetes example (kind)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/checkout@v5
+        with:
+          repository: lesismal/fit
+          path: .fit
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: .fit/go.mod
+      - uses: azure/setup-helm@v4
+      - name: Install kind
+        run: |
+          if ! command -v kind >/dev/null; then
+            go install sigs.k8s.io/kind@v0.30.0
+            echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+          fi
+      - run: FIT_DIR="$GITHUB_WORKSPACE/.fit" kubernetes/test.sh
