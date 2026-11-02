@@ -1,5 +1,7 @@
 # A Gateway of fit's GatewayClass, listening for HTTP on port 80, and an
 # HTTPRoute sending whoami.example's requests to the app.
+# 一个属于 fit 的 GatewayClass 的 Gateway，在端口 80 上监听 HTTP；以及一个
+# HTTPRoute，把 whoami.example 的请求发往该应用。
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:

@@ -5,7 +5,7 @@
 [English](README.md) | [简体中文](README.zh-CN.md)
 
 [fit](https://github.com/lesismal/fit)（基于 fib 的网关和 Web 服务器）的配置示例。下面每个目录是一项功能的配置：
-一份不大、带注释的配置，只写用户实际会设置的字段，用 fit 的 [.conf 格式](https://github.com/lesismal/fit/blob/main/docs/reference/fit.zh-CN.md)
+一份不大的配置，只写用户实际会设置的字段，注释先英文后中文，用 fit 的 [.conf 格式](https://github.com/lesismal/fit/blob/main/docs/reference/fit.zh-CN.md)
 写成一个 `fit.conf` 文件。同样内容的 [YAML](https://github.com/lesismal/fit/blob/main/docs/reference/yaml.zh-CN.md) 和
 [JSON](https://github.com/lesismal/fit/blob/main/docs/reference/json.zh-CN.md) 版本在计划中，见 [PLAN.zh-CN.md](PLAN.zh-CN.md)。
 每个模块的全部字段见 fit 的[配置模板](https://github.com/lesismal/fit/blob/main/templates/README.zh-CN.md)。测试会对每个示例运行

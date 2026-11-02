@@ -7,6 +7,7 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
+	"unicode"
 
 	_ "github.com/lesismal/fit/app/standard"
 	"github.com/lesismal/fit/cli"
@@ -45,6 +46,60 @@ func TestConfigs(t *testing.T) {
 			t.Errorf("unvalidated example %s: %v", name, err)
 		}
 	}
+}
+
+// TestBilingualComments checks that every block of comment lines in a
+// fit.conf, those in a row at one indentation, is in English and then in
+// Chinese: it has a line with Chinese in it, after one without.
+func TestBilingualComments(t *testing.T) {
+	confs, _ := filepath.Glob("*/fit.conf")
+	for _, f := range confs {
+		data, err := os.ReadFile(f)
+		if err != nil {
+			t.Fatal(err)
+		}
+		var block []string
+		start, indent := 0, ""
+		check := func() {
+			english, chinese := false, false
+			for _, l := range block {
+				if hasHan(l) {
+					chinese = chinese || english
+				} else {
+					english = true
+				}
+			}
+			if len(block) > 0 && (!english || !chinese) {
+				t.Errorf("%s:%d: a comment not in English and then Chinese: %q", f, start, block)
+			}
+			block = block[:0]
+		}
+		for i, line := range strings.Split(string(data), "\n") {
+			trimmed := strings.TrimLeft(line, " \t")
+			lead := line[:len(line)-len(trimmed)]
+			if !strings.HasPrefix(trimmed, "#") {
+				check()
+				continue
+			}
+			if len(block) > 0 && lead != indent {
+				check()
+			}
+			if len(block) == 0 {
+				start, indent = i+1, lead
+			}
+			block = append(block, trimmed)
+		}
+		check()
+	}
+}
+
+func hasHan(s string) bool {
+	for _, r := range s {
+		if unicode.Is(unicode.Han, r) {
+			return true
+		}
+	}
+	return false
 }
 
 // TestEveryDirectory checks that every directory is an example: it has a

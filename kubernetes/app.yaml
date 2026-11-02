@@ -1,5 +1,7 @@
 # The app fit sends to: two replicas of whoami, which answers with its
 # pod's name, behind a Service.
+# fit 发往的应用：位于一个 Service 之后的两个 whoami 副本，whoami 会应答
+# 自己 pod 的名字。
 apiVersion: apps/v1
 kind: Deployment
 metadata:

@@ -5,8 +5,8 @@
 [English](README.md) | [简体中文](README.zh-CN.md)
 
 Config examples for [fit](https://github.com/lesismal/fit), the gateway and web server on fib. Each
-directory below holds one feature's config: a small, commented one with the fields a user would
-set, in fit's [.conf format](https://github.com/lesismal/fit/blob/main/docs/reference/fit.md), one `fit.conf` file. The same
+directory below holds one feature's config: a small one with the fields a user would set, its
+comments in English and then in Chinese, in fit's [.conf format](https://github.com/lesismal/fit/blob/main/docs/reference/fit.md), one `fit.conf` file. The same
 examples in [YAML](https://github.com/lesismal/fit/blob/main/docs/reference/yaml.md) and [JSON](https://github.com/lesismal/fit/blob/main/docs/reference/json.md)
 are planned, see [PLAN.md](PLAN.md). Every field of every module is in fit's
 [templates](https://github.com/lesismal/fit/blob/main/templates/README.md) instead. The test runs `fit validate` on every

@@ -1,16 +1,21 @@
 # fit in front of an app's containers, which it finds by their labels with
 # the Docker provider and follows as they start and stop. See README.md.
+# fit 位于应用的容器之前，它通过 Docker provider 按标签发现这些容器，并在
+# 它们启动和停止时跟随变化。见 README.md。
 name: fit-example
 
 services:
   fit:
     # FIT_DIR is a checkout of github.com/lesismal/fit, by default beside
     # this repository's.
+    # FIT_DIR 是 github.com/lesismal/fit 的检出目录，默认在本仓库的旁边。
     build: ${FIT_DIR:-../../fit}
     image: fit:local
     # The Docker socket is root's, so fit reads it as root here. A socket
     # proxy, as the provider's endpoint "tcp://...", lets fit keep the
     # image's own user.
+    # Docker socket 属于 root，所以这里 fit 以 root 读取它。使用 socket 代理，
+    # 作为 provider 的 endpoint "tcp://..."，可让 fit 保持镜像自己的用户。
     user: root
     ports:
       - "8080:8080"
@@ -22,6 +27,8 @@ services:
 
   # Two replicas, one upstream: fit balances between them and checks their
   # health. Its labels are the whole of its routing.
+  # 两个副本，一个上游：fit 在它们之间负载均衡并检查其健康。它的标签就是它的
+  # 全部路由。
   whoami:
     image: traefik/whoami:v1.11.0
     deploy:

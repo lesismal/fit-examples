@@ -7,11 +7,13 @@
 - **.conf examples**: every feature's directory has its config as `fit.conf`, checked with
   `fit validate` by [examples_test.go](examples_test.go). They moved here from fit's `examples/`
   directory, the Docker Compose example's config from JSON to .conf with them.
+- **Comments in English and Chinese**: every comment is in English and then in Chinese, which the
+  test checks for every block of comment lines.
 
 ## Next
 
 - **YAML**: a `fit.yaml` beside every `fit.conf`, saying the same. `fit adapt -c <dir>/fit.conf
-  -to yaml` gives a start, without the comments, which are written again by hand; the YAML
+  -to yaml` gives a start, without the comments, which are written again by hand, in both languages; the YAML
   examples fit had before the move are in its history, at `examples/*/fit.yaml` before the commit
   that removed `examples/`. The test then checks that each `fit.yaml` validates and adapts to the
   same JSON as its `fit.conf`.
