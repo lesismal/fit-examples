@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Video site</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/site.css">
+</head>
+<body>
+<header>
+  <strong>Video site</strong>
+  <span id="who"></span>
+  <button id="logout" type="button" hidden>Log out</button>
+</header>
+<main>
+  <form id="login" hidden autocomplete="on">
+    <h2>Log in</h2>
+    <label>User <input id="user" autocomplete="username" required></label>
+    <label>Password <input id="password" type="password" autocomplete="current-password" required></label>
+    <button type="submit">Log in</button>
+    <p class="hint">alice or bob, password example-password</p>
+  </form>
+  <section id="catalog" hidden>
+    <h2>Watch</h2>
+    <ul id="titles"></ul>
+  </section>
+  <section id="player" hidden>
+    <h2 id="now"></h2>
+    <video id="video" controls playsinline></video>
+    <p id="status" class="hint"></p>
+    <button id="again" type="button" hidden>Play again</button>
+  </section>
+</main>
+<!-- hls.js (Apache-2.0), as fit's media pages serve it: fit vendors it. -->
+<script src="/media/vendor/hls.min.js"></script>
+<script src="/site.js"></script>
+</body>
+</html>

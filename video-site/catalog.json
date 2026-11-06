@@ -1,0 +1,5 @@
+[
+  {"kind": "film", "id": "films/testcard", "title": "Test card"},
+  {"kind": "film", "id": "films/bars", "title": "Colour bars"},
+  {"kind": "channel", "id": "tv/films", "title": "Films, round the clock"}
+]

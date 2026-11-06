@@ -134,6 +134,7 @@ fit would otherwise make and write back into the file.
 | [webrtc-proxy](webrtc-proxy/fit.conf) | WHIP and WHEP media servers behind fit, their media relayed through one UDP port. |
 | [streaming](streaming/fit.conf) | The streaming role: RTMP, RTSP, SRT and WHIP in, HTTP-FLV, HLS and WHEP out, behind a `media_auth` policy. |
 | [media-pages](media-pages/fit.conf) | fit's media pages: a room call, publish and play, with a login and microphone and camera switches. |
+| [video-site](video-site/fit.conf) | A video site: films in a media library on demand (`vod`) and as a channel, played with hls.js through playback URLs that expire, which [its own API](video-site/api/main.go) asks `media_tokens` for after logging the viewer in; fit's library and player pages for the staff. [make-media.sh](video-site/make-media.sh) makes its films with ffmpeg. |
 
 ## Modules
 

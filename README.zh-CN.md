@@ -131,6 +131,7 @@ llm 的示例写明了 `id`，否则 fit 会生成一个并写回文件。
 | [webrtc-proxy](webrtc-proxy/fit.conf) | fit 后面的 WHIP 和 WHEP 媒体服务器，媒体经由一个 UDP 端口中继。 |
 | [streaming](streaming/fit.conf) | 流媒体角色：RTMP、RTSP、SRT 和 WHIP 推流，HTTP-FLV、HLS 和 WHEP 播放，受 `media_auth` 策略保护。 |
 | [media-pages](media-pages/fit.conf) | fit 的媒体页面：房间通话、推流和播放，带登录以及麦克风和摄像头开关。 |
+| [video-site](video-site/fit.conf) | 一个视频网站：媒体库中的影片以点播（`vod`）和频道两种方式提供，用 hls.js 经由会过期的播放地址播放；地址由[网站自己的 API](video-site/api/main.go) 在观众登录后向 `media_tokens` 申请；另有 fit 给工作人员的片库和播放页面。[make-media.sh](video-site/make-media.sh) 用 ffmpeg 生成它的影片。 |
 
 ## 模块
 
