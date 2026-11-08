@@ -4,6 +4,7 @@ package examples
 
 import (
 	"os"
+	"os/exec"
 	"path/filepath"
 	"strings"
 	"testing"
@@ -19,6 +20,20 @@ import (
 // because they name files a user supplies, which validate opens.
 var noValidate = map[string]string{
 	"https": "its certificate and key files are the user's own",
+	// fit's mysql sync source is its dev-plan item I174: validate this
+	// example once the fit go.mod requires has it.
+	"sync-mysql-to-postgres": "fit's mysql sync source is not in the fit this repository requires yet",
+}
+
+// secrets are the environment variables the examples' passwords are read
+// from, which fit validate reads as fit run does: set here to stand-ins.
+var secrets = []string{"ES_PASSWORD", "KAFKA_PASSWORD", "MYSQL_PASSWORD", "PG_PASSWORD"}
+
+// plugins are the WebAssembly plugins examples load, built from their Go
+// sources before the examples are validated, since fit validate loads
+// them: the file each is built to, and its package.
+var plugins = map[string]string{
+	"sync-wasm-transform/users.wasm": "./sync-wasm-transform/plugin",
 }
 
 // TestConfigs checks every example directory's fit.conf with fit validate,
@@ -28,6 +43,16 @@ func TestConfigs(t *testing.T) {
 	confs, _ := filepath.Glob("*/fit.conf")
 	if len(confs) < 50 {
 		t.Fatalf("only %d examples", len(confs))
+	}
+	for _, name := range secrets {
+		t.Setenv(name, "example-password")
+	}
+	for out, pkg := range plugins {
+		cmd := exec.Command("go", "build", "-buildmode=c-shared", "-o", out, pkg)
+		cmd.Env = append(os.Environ(), "GOOS=wasip1", "GOARCH=wasm", "CGO_ENABLED=0")
+		if b, err := cmd.CombinedOutput(); err != nil {
+			t.Fatalf("building %s: %v\n%s", out, err, b)
+		}
 	}
 	for _, f := range confs {
 		name := filepath.Dir(f)

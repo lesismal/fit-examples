@@ -135,6 +135,19 @@ fit would otherwise make and write back into the file.
 | [streaming](streaming/fit.conf) | The streaming role: RTMP, RTSP, SRT and WHIP in, HTTP-FLV, HLS and WHEP out, behind a `media_auth` policy. |
 | [media-pages](media-pages/fit.conf) | fit's media pages: a room call, publish and play, with a login and microphone and camera switches. |
 
+## Sync
+
+| Example | What it shows |
+| --- | --- |
+| [sync-files-to-elasticsearch](sync-files-to-elasticsearch/fit.conf) | Log files tailed across rotations into a daily Elasticsearch index, as Filebeat does, with dead letters. |
+| [sync-mysql-to-postgres](sync-mysql-to-postgres/fit.conf) | MySQL's tables kept in PostgreSQL: a snapshot without locks, then the binlog, exactly once. |
+| [sync-postgres-to-kafka](sync-postgres-to-kafka/fit.conf) | PostgreSQL's changes through logical replication to Kafka topics in Debezium's format. |
+| [sync-wasm-transform](sync-wasm-transform/fit.conf) | A WebAssembly transform of your own, [in Go](sync-wasm-transform/plugin/main.go), over records read from a file; runs with fit alone. |
+
+The sync examples read their passwords from environment variables, which `fit validate` reads too.
+[Sync](https://github.com/lesismal/fit/blob/main/docs/sync.md) explains pipelines, checkpoints and
+every connector.
+
 ## Modules
 
 | Example | What it shows |
