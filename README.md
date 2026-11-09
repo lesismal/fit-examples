@@ -143,6 +143,15 @@ fit would otherwise make and write back into the file.
 | [sync-files-to-elasticsearch](sync-files-to-elasticsearch/fit.conf) | Log files tailed across rotations into a daily Elasticsearch index, as Filebeat does, with dead letters. |
 | [sync-mysql-to-postgres](sync-mysql-to-postgres/fit.conf) | MySQL's tables kept in PostgreSQL: a snapshot without locks, then the binlog, exactly once. |
 | [sync-postgres-to-kafka](sync-postgres-to-kafka/fit.conf) | PostgreSQL's changes through logical replication to Kafka topics in Debezium's format. |
+| [sync-rabbitmq-to-kafka](sync-rabbitmq-to-kafka/fit.conf) | A RabbitMQ queue into Kafka, each message acknowledged once Kafka has it, and a Kafka topic published to a RabbitMQ exchange with publisher confirms. |
+| [sync-postgres-to-nats](sync-postgres-to-nats/fit.conf) | PostgreSQL's changes to NATS JetStream, deduplicated by Nats-Msg-Id, and the stream read back through a durable pull consumer into a search index. |
+| [sync-pulsar-to-elasticsearch](sync-pulsar-to-elasticsearch/fit.conf) | A Pulsar topic into Elasticsearch through readers from the checkpoint's message IDs, and MySQL's changes to Pulsar with broker deduplication. |
+| [sync-mqtt-to-influxdb](sync-mqtt-to-influxdb/fit.conf) | The IoT pipeline: devices' JSON readings on MQTT at QoS 1, kept by a persistent session, as InfluxDB points by device and time; alerts back out on MQTT. |
+| [sync-mqtt-to-tdengine](sync-mqtt-to-tdengine/fit.conf) | Meters' readings on MQTT into TDengine's super table, a subtable per meter, through taosAdapter's REST interface. |
+| [sync-mssql-to-kafka](sync-mssql-to-kafka/fit.conf) | SQL Server's changes from its CDC tables, after a snapshot without locks, to Kafka topics in Debezium's format. |
+| [sync-mysql-to-doris](sync-mysql-to-doris/fit.conf) | MySQL's tables kept in Apache Doris (or StarRocks) by Stream Load with labels and the delete sign, and a Doris table polled by a cursor. |
+| [sync-files-to-loki](sync-files-to-loki/fit.conf) | Log files to Grafana Loki, streams labelled from bounded fields, and to an OpenTelemetry Collector as OTLP log records. |
+| [sync-postgres-to-vectors](sync-postgres-to-vectors/fit.conf) | PostgreSQL's articles with embeddings (the embed transform, cached by the text's hash) upserted into Qdrant and Milvus, deletes deleting. |
 | [sync-wasm-transform](sync-wasm-transform/fit.conf) | A WebAssembly transform of your own, [in Go](sync-wasm-transform/plugin/main.go), over records read from a file; runs with fit alone. |
 | [sync-wasm-codec](sync-wasm-codec/fit.conf) | A WebAssembly codec of your own, [in Go](sync-wasm-codec/plugin/main.go), reading a line format of its own from a file and writing it back; runs with fit alone. |
 | [sync-wasm-source](sync-wasm-source/fit.conf) | A WebAssembly source of your own, [in Go](sync-wasm-source/plugin/main.go), reading a paged HTTP API, which fit serves too, from its checkpoint. |

@@ -140,6 +140,15 @@ llm 的示例写明了 `id`，否则 fit 会生成一个并写回文件。
 | [sync-files-to-elasticsearch](sync-files-to-elasticsearch/fit.conf) | 像 Filebeat 那样跨轮转跟踪日志文件，写入按天的 Elasticsearch 索引，带死信。 |
 | [sync-mysql-to-postgres](sync-mysql-to-postgres/fit.conf) | 在 PostgreSQL 中保持 MySQL 的表：先无锁读快照，再读 binlog，恰好一次。 |
 | [sync-postgres-to-kafka](sync-postgres-to-kafka/fit.conf) | PostgreSQL 的变更经逻辑复制写入 Kafka 主题，采用 Debezium 格式。 |
+| [sync-rabbitmq-to-kafka](sync-rabbitmq-to-kafka/fit.conf) | RabbitMQ 队列写入 Kafka，每条消息在 Kafka 拿到后才确认；Kafka 主题经发布确认发布到 RabbitMQ 交换器。 |
+| [sync-postgres-to-nats](sync-postgres-to-nats/fit.conf) | PostgreSQL 的变更写入 NATS JetStream，按 Nats-Msg-Id 去重；再经持久的拉取消费者读回该流，写入搜索索引。 |
+| [sync-pulsar-to-elasticsearch](sync-pulsar-to-elasticsearch/fit.conf) | Pulsar 主题经 reader 从检查点中的消息 ID 读取，写入 Elasticsearch；MySQL 的变更写入 Pulsar，由 broker 去重。 |
+| [sync-mqtt-to-influxdb](sync-mqtt-to-influxdb/fit.conf) | 物联网流水线：设备在 MQTT 上以 QoS 1 发布的 JSON 读数，由持久会话保留，按设备和时间写成 InfluxDB 数据点；告警经 MQTT 发回。 |
+| [sync-mqtt-to-tdengine](sync-mqtt-to-tdengine/fit.conf) | 电表在 MQTT 上的读数经 taosAdapter 的 REST 接口写入 TDengine 的超级表，每个电表一个子表。 |
+| [sync-mssql-to-kafka](sync-mssql-to-kafka/fit.conf) | SQL Server 先无锁读快照，再从 CDC 表读取变更，以 Debezium 格式写入 Kafka 主题。 |
+| [sync-mysql-to-doris](sync-mysql-to-doris/fit.conf) | 经带 label 的 Stream Load 和删除标记在 Apache Doris（或 StarRocks）中保持 MySQL 的表；并按游标轮询一张 Doris 表。 |
+| [sync-files-to-loki](sync-files-to-loki/fit.conf) | 日志文件写入 Grafana Loki（流的标签取自取值有限的字段），并以 OTLP 日志记录写入 OpenTelemetry Collector。 |
+| [sync-postgres-to-vectors](sync-postgres-to-vectors/fit.conf) | PostgreSQL 的文章带上向量（embed 变换，按文本哈希缓存）upsert 到 Qdrant 和 Milvus，删除则删除。 |
 | [sync-wasm-transform](sync-wasm-transform/fit.conf) | 自己编写的 WebAssembly 变换（[Go 源码](sync-wasm-transform/plugin/main.go)），处理从文件读到的记录；只需 fit 即可运行。 |
 | [sync-wasm-codec](sync-wasm-codec/fit.conf) | 自己编写的 WebAssembly 编解码器（[Go 源码](sync-wasm-codec/plugin/main.go)），从文件读取自己的行格式并写回；只需 fit 即可运行。 |
 | [sync-wasm-source](sync-wasm-source/fit.conf) | 自己编写的 WebAssembly 源（[Go 源码](sync-wasm-source/plugin/main.go)），从检查点开始读取分页的 HTTP API，API 也由 fit 提供。 |

@@ -24,7 +24,9 @@ var noValidate = map[string]string{
 
 // secrets are the environment variables the examples' passwords are read
 // from, which fit validate reads as fit run does: set here to stand-ins.
-var secrets = []string{"ES_PASSWORD", "KAFKA_PASSWORD", "MYSQL_PASSWORD", "PG_PASSWORD"}
+var secrets = []string{"ES_PASSWORD", "KAFKA_PASSWORD", "MYSQL_PASSWORD", "PG_PASSWORD",
+	"RABBITMQ_PASSWORD", "NATS_PASSWORD", "PULSAR_TOKEN", "MQTT_PASSWORD", "INFLUX_TOKEN", "TD_PASSWORD",
+	"MSSQL_PASSWORD", "DORIS_PASSWORD", "OPENAI_API_KEY", "QDRANT_API_KEY", "MILVUS_TOKEN"}
 
 // plugins are the WebAssembly plugins examples load, built from their Go
 // sources before the examples are validated, since fit validate loads
