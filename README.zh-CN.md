@@ -148,6 +148,15 @@ llm 的示例写明了 `id`，否则 fit 会生成一个并写回文件。
 WebAssembly 插件可用 Go 或 TinyGo 构建，见各插件的注释。同步示例从环境变量读取密码，`fit validate` 也会读取它们。[同步](https://github.com/lesismal/fit/blob/main/docs/sync.zh-CN.md)
 讲解流水线、检查点和每个连接器。
 
+## BitTorrent
+
+| 示例 | 内容 |
+| --- | --- |
+| [bittorrent](bittorrent/fit.conf) | BitTorrent 客户端：监视目录、分类（其中一个接入媒体库）、排队、工作日的备用速率，并把 [bittorrent/releases](bittorrent/releases) 发布为混合种子，以 fit 自己作为 web seed；基于 `media_auth` 策略 passkey 的私有 tracker；在 `/bt/<info hash>/` 边下载边播放文件；通过 Admin API 使用 `fit bt`。 |
+
+[BitTorrent](https://github.com/lesismal/fit/blob/main/docs/bittorrent.zh-CN.md) 讲解客户端、tracker、
+发布、`bt_stream` 和 `fit bt`。
+
 ## 模块
 
 | 示例 | 内容 |

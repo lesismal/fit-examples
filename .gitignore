@@ -5,3 +5,6 @@ sync-wasm-transform/users.wasm
 sync-wasm-codec/prices.wasm
 sync-wasm-source/pages.wasm
 sync-wasm-sink/webhook.wasm
+bittorrent/data/
+bittorrent/downloads/
+bittorrent/watch/
