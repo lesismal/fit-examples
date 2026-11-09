@@ -136,6 +136,19 @@ fit would otherwise make and write back into the file.
 | [media-pages](media-pages/fit.conf) | fit's media pages: a room call, publish and play, with a login and microphone and camera switches. |
 | [video-site](video-site/fit.conf) | A video site: films in a media library on demand (`vod`) and as a channel, played with hls.js through playback URLs that expire, which [its own API](video-site/api/main.go) asks `media_tokens` for after logging the viewer in; fit's library and player pages for the staff. [make-media.sh](video-site/make-media.sh) makes its films with ffmpeg. |
 
+## Sync
+
+| Example | What it shows |
+| --- | --- |
+| [sync-files-to-elasticsearch](sync-files-to-elasticsearch/fit.conf) | Log files tailed across rotations into a daily Elasticsearch index, as Filebeat does, with dead letters. |
+| [sync-mysql-to-postgres](sync-mysql-to-postgres/fit.conf) | MySQL's tables kept in PostgreSQL: a snapshot without locks, then the binlog, exactly once. |
+| [sync-postgres-to-kafka](sync-postgres-to-kafka/fit.conf) | PostgreSQL's changes through logical replication to Kafka topics in Debezium's format. |
+| [sync-wasm-transform](sync-wasm-transform/fit.conf) | A WebAssembly transform of your own, [in Go](sync-wasm-transform/plugin/main.go), over records read from a file; runs with fit alone. |
+
+The sync examples read their passwords from environment variables, which `fit validate` reads too.
+[Sync](https://github.com/lesismal/fit/blob/main/docs/sync.md) explains pipelines, checkpoints and
+every connector.
+
 ## Modules
 
 | Example | What it shows |

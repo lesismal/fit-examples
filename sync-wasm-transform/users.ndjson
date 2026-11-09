@@ -1,0 +1,4 @@
+{"id": 1, "name": "Alice", "email": "alice@example.com"}
+{"id": 2, "name": "Bob", "email": "bob@example.org"}
+{"id": 3, "name": "Test user", "email": "qa@example.test"}
+{"id": 4, "name": "Carol", "email": "carol@Example.COM"}

@@ -133,6 +133,18 @@ llm 的示例写明了 `id`，否则 fit 会生成一个并写回文件。
 | [media-pages](media-pages/fit.conf) | fit 的媒体页面：房间通话、推流和播放，带登录以及麦克风和摄像头开关。 |
 | [video-site](video-site/fit.conf) | 一个视频网站：媒体库中的影片以点播（`vod`）和频道两种方式提供，用 hls.js 经由会过期的播放地址播放；地址由[网站自己的 API](video-site/api/main.go) 在观众登录后向 `media_tokens` 申请；另有 fit 给工作人员的片库和播放页面。[make-media.sh](video-site/make-media.sh) 用 ffmpeg 生成它的影片。 |
 
+## 同步
+
+| 示例 | 展示内容 |
+| --- | --- |
+| [sync-files-to-elasticsearch](sync-files-to-elasticsearch/fit.conf) | 像 Filebeat 那样跨轮转跟踪日志文件，写入按天的 Elasticsearch 索引，带死信。 |
+| [sync-mysql-to-postgres](sync-mysql-to-postgres/fit.conf) | 在 PostgreSQL 中保持 MySQL 的表：先无锁读快照，再读 binlog，恰好一次。 |
+| [sync-postgres-to-kafka](sync-postgres-to-kafka/fit.conf) | PostgreSQL 的变更经逻辑复制写入 Kafka 主题，采用 Debezium 格式。 |
+| [sync-wasm-transform](sync-wasm-transform/fit.conf) | 自己编写的 WebAssembly 变换（[Go 源码](sync-wasm-transform/plugin/main.go)），处理从文件读到的记录；只需 fit 即可运行。 |
+
+同步示例从环境变量读取密码，`fit validate` 也会读取它们。[同步](https://github.com/lesismal/fit/blob/main/docs/sync.zh-CN.md)
+讲解流水线、检查点和每个连接器。
+
 ## 模块
 
 | 示例 | 内容 |

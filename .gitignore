@@ -1,3 +1,4 @@
 go.work
 go.work.sum
 video-site/media/
+sync-wasm-transform/users.wasm
