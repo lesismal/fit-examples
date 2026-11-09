@@ -153,6 +153,15 @@ read their passwords from environment variables, which `fit validate` reads too.
 [Sync](https://github.com/lesismal/fit/blob/main/docs/sync.md) explains pipelines, checkpoints and
 every connector.
 
+## BitTorrent
+
+| Example | What it shows |
+| --- | --- |
+| [bittorrent](bittorrent/fit.conf) | The BitTorrent client, with a watch directory, categories (one feeding a media library), a queue, weekday alternative rates and [bittorrent/releases](bittorrent/releases) published as hybrid torrents with fit's own web seed; a private tracker on passkeys of a `media_auth` policy; files played at `/bt/<info hash>/` while they download; `fit bt` through the Admin API. |
+
+[BitTorrent](https://github.com/lesismal/fit/blob/main/docs/bittorrent.md) explains the client, the
+tracker, publishing, `bt_stream` and `fit bt`.
+
 ## Modules
 
 | Example | What it shows |
