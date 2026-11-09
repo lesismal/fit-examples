@@ -20,9 +20,6 @@ import (
 // because they name files a user supplies, which validate opens.
 var noValidate = map[string]string{
 	"https": "its certificate and key files are the user's own",
-	// fit's mysql sync source is its dev-plan item I174: validate this
-	// example once the fit go.mod requires has it.
-	"sync-mysql-to-postgres": "fit's mysql sync source is not in the fit this repository requires yet",
 }
 
 // secrets are the environment variables the examples' passwords are read
