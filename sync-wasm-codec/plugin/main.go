@@ -43,8 +43,8 @@ func decode(data []byte) error {
 		row := guest.Row{
 			{Name: "id", Value: guest.Int(id)},
 			{Name: "name", Value: guest.String(parts[1])},
-			// A decimal keeps the price exact; its JSON is {"decimal": "..."}.
-			{Name: "price", Value: []byte(`{"decimal":` + strconv.Quote(parts[2]) + `}`)},
+			// A decimal keeps the price exact.
+			{Name: "price", Value: guest.Decimal(parts[2])},
 		}
 		guest.Emit(0, &guest.Record{Op: "insert", Key: key.Value(), After: row.Value()})
 	}
@@ -79,17 +79,11 @@ func encode(batch []guest.Record) ([]byte, error) {
 // held as a string.
 func decimal(row guest.Row) string {
 	v, _ := row.Get("price")
-	if s, ok := guest.AsString(v); ok {
+	if s, ok := guest.AsDecimal(v); ok {
 		return s
 	}
-	s := string(v)
-	if i := strings.Index(s, `"decimal":"`); i >= 0 {
-		s = s[i+len(`"decimal":"`):]
-		if j := strings.IndexByte(s, '"'); j >= 0 {
-			return s[:j]
-		}
-	}
-	return ""
+	s, _ := guest.AsString(v)
+	return s
 }
 
 func main() {}
