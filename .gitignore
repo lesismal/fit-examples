@@ -2,3 +2,6 @@ go.work
 go.work.sum
 video-site/media/
 sync-wasm-transform/users.wasm
+sync-wasm-codec/prices.wasm
+sync-wasm-source/pages.wasm
+sync-wasm-sink/webhook.wasm

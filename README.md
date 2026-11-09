@@ -144,8 +144,12 @@ fit would otherwise make and write back into the file.
 | [sync-mysql-to-postgres](sync-mysql-to-postgres/fit.conf) | MySQL's tables kept in PostgreSQL: a snapshot without locks, then the binlog, exactly once. |
 | [sync-postgres-to-kafka](sync-postgres-to-kafka/fit.conf) | PostgreSQL's changes through logical replication to Kafka topics in Debezium's format. |
 | [sync-wasm-transform](sync-wasm-transform/fit.conf) | A WebAssembly transform of your own, [in Go](sync-wasm-transform/plugin/main.go), over records read from a file; runs with fit alone. |
+| [sync-wasm-codec](sync-wasm-codec/fit.conf) | A WebAssembly codec of your own, [in Go](sync-wasm-codec/plugin/main.go), reading a line format of its own from a file and writing it back; runs with fit alone. |
+| [sync-wasm-source](sync-wasm-source/fit.conf) | A WebAssembly source of your own, [in Go](sync-wasm-source/plugin/main.go), reading a paged HTTP API, which fit serves too, from its checkpoint. |
+| [sync-wasm-sink](sync-wasm-sink/fit.conf) | A WebAssembly sink of your own, [in Go](sync-wasm-sink/plugin/main.go), posting batches to a webhook, which fit answers too. |
 
-The sync examples read their passwords from environment variables, which `fit validate` reads too.
+The WebAssembly plugins build by Go or by TinyGo, as each plugin's comment shows. The sync examples
+read their passwords from environment variables, which `fit validate` reads too.
 [Sync](https://github.com/lesismal/fit/blob/main/docs/sync.md) explains pipelines, checkpoints and
 every connector.
 

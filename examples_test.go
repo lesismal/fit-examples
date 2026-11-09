@@ -31,6 +31,9 @@ var secrets = []string{"ES_PASSWORD", "KAFKA_PASSWORD", "MYSQL_PASSWORD", "PG_PA
 // them: the file each is built to, and its package.
 var plugins = map[string]string{
 	"sync-wasm-transform/users.wasm": "./sync-wasm-transform/plugin",
+	"sync-wasm-codec/prices.wasm":    "./sync-wasm-codec/plugin",
+	"sync-wasm-source/pages.wasm":    "./sync-wasm-source/plugin",
+	"sync-wasm-sink/webhook.wasm":    "./sync-wasm-sink/plugin",
 }
 
 // TestConfigs checks every example directory's fit.conf with fit validate,

@@ -141,8 +141,11 @@ llm 的示例写明了 `id`，否则 fit 会生成一个并写回文件。
 | [sync-mysql-to-postgres](sync-mysql-to-postgres/fit.conf) | 在 PostgreSQL 中保持 MySQL 的表：先无锁读快照，再读 binlog，恰好一次。 |
 | [sync-postgres-to-kafka](sync-postgres-to-kafka/fit.conf) | PostgreSQL 的变更经逻辑复制写入 Kafka 主题，采用 Debezium 格式。 |
 | [sync-wasm-transform](sync-wasm-transform/fit.conf) | 自己编写的 WebAssembly 变换（[Go 源码](sync-wasm-transform/plugin/main.go)），处理从文件读到的记录；只需 fit 即可运行。 |
+| [sync-wasm-codec](sync-wasm-codec/fit.conf) | 自己编写的 WebAssembly 编解码器（[Go 源码](sync-wasm-codec/plugin/main.go)），从文件读取自己的行格式并写回；只需 fit 即可运行。 |
+| [sync-wasm-source](sync-wasm-source/fit.conf) | 自己编写的 WebAssembly 源（[Go 源码](sync-wasm-source/plugin/main.go)），从检查点开始读取分页的 HTTP API，API 也由 fit 提供。 |
+| [sync-wasm-sink](sync-wasm-sink/fit.conf) | 自己编写的 WebAssembly 目标（[Go 源码](sync-wasm-sink/plugin/main.go)），把批次发送到 webhook，webhook 也由 fit 应答。 |
 
-同步示例从环境变量读取密码，`fit validate` 也会读取它们。[同步](https://github.com/lesismal/fit/blob/main/docs/sync.zh-CN.md)
+WebAssembly 插件可用 Go 或 TinyGo 构建，见各插件的注释。同步示例从环境变量读取密码，`fit validate` 也会读取它们。[同步](https://github.com/lesismal/fit/blob/main/docs/sync.zh-CN.md)
 讲解流水线、检查点和每个连接器。
 
 ## 模块

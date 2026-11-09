@@ -1,0 +1,7 @@
+{
+  "items": [
+    {"id": 1, "title": "Login page is slow", "state": "open"},
+    {"id": 2, "title": "Typo on the pricing page", "state": "closed"}
+  ],
+  "next": "page-2.json"
+}
